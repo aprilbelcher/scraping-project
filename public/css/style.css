@@ -1,0 +1,39 @@
+.container > .jumbotron{
+  margin-top: 20px;
+  background-image: url("newsBackground.jpg");
+  height: 275px;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+}
+
+.btn-lg{
+  background-color: #39B4FF;
+  color: white;
+  margin: 10px;
+  float: right;
+  
+
+}
+
+.panel > .panel-heading{
+  background-color: #396A90;
+  color: white;
+  padding: 20px 15px;
+}
+
+.panel{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.save-article{ 
+  background-color: #47C9AF;
+  color: white;
+}
+.delete-article{
+  background-color: #E91818;
+  color: white;
+}
+.comment-article{
+  background-color: #47C9AF;
+  color: white;
+}
