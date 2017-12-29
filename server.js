@@ -16,19 +16,14 @@ var PORT = process.env.PORT || 3000;
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//*****Scraping Tools*****//
-var axios = require("axios");
-var cheerio = require("cheerio");
+//*****Use Handelbars*****//
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
-
+//*****Make Public Folder Static Directory*****//
 app.use(express.static("public"));
 
-//*****Use Handlebars*****
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
 //*****Connect to Mongo DB*****
-mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/scrapingProject");
 
 var db = mongoose.connection;
@@ -40,8 +35,7 @@ db.once('open', function () {
 });
 
 //*****Require Routes*****
-require("./controllers/article_controller.js")(app);
-
+require("./controllers/articlesController.js")(app);
 
 //*****Start Server*****
 app.listen(PORT, function() {
