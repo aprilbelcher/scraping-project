@@ -12,7 +12,7 @@ mongoose.Promise = Promise;
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-//*****Use Morgan Logger, Body Parser and Express Static*****
+//*****Use Morgan Logger, Body Parser and Express Static*****//
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
@@ -27,7 +27,7 @@ app.set('view engine', 'handlebars');
 //*****Make Public Folder Static Directory*****//
 app.use(express.static("public"));
 
-//*****Connect to Mongo DB*****
+//*****Connect to Mongo DB*****//
 mongoose.connect("mongodb://localhost/scrapingProject");
 
 var db = mongoose.connection;
@@ -38,10 +38,10 @@ db.once('open', function () {
   console.log('Connected');
 });
 
-//*****Require Routes*****
+//*****Require Routes*****//
 require("./controllers/articleController.js")(app);
 
-//*****Start Server*****
+//*****Start Server*****//
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
 });
