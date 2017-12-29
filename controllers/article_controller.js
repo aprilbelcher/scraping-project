@@ -6,7 +6,7 @@ var Comment = require("../models/comments.js");
 var Article = require("../models/articles.js");
 
 module.exports = function (app) {
-
+//***home page***//
   app.get('/', function (req, res) {
     res.redirect('/articles');
   });
@@ -14,6 +14,8 @@ module.exports = function (app) {
   app.get("/scrape", function (req, res) {
     request("https://www.nytimes.com/", function (error, response, html) {
       var $ = cheerio.load(html);
+      var scrapeData = [];
+
       $("article").each(function (i, element) {
 
         var result = {};
@@ -22,22 +24,41 @@ module.exports = function (app) {
         result.articleSnippet = $(this).children(".summary").text();
         result.link = $(this).children("h2").children("a").attr("href");
 
-        var entry = new Article(result);
+        scrapeData.push(result)
 
-        entry.save(function (err, doc) {
+        // var entry = new Article(result);
 
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(doc);
-          }
-        });
+        // entry.save(function (err, doc) {
+
+        //   if (err) {
+        //     console.log(err);
+        //   } else {
+        //     console.log(doc);
+        //   }
+        // });
 
       });
-      res.send("Scrape Complete");
+        res.render("index", {result: scrapeData});
+      
 
     });
   });
+
+  app.post("/save", function(req, res) {
+    console.log(req.body);
+    var entry = new Article(req.body);
+    // Now, save that entry to the db
+    entry.save(function(err, doc) {
+      // Log any errors
+      if (err) {
+        console.log(err);
+      }
+      // Or log the doc
+      else {
+        console.log(doc);
+      }
+    });
+});
 
   // This will get the articles we scraped from the mongoDB
   app.get("/articles", function (req, res) {

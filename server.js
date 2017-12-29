@@ -8,8 +8,8 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
-//*****Require All Models*****
-var db = require("./models");
+// //*****Require All Models*****
+// var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 //*****Use Handlebars*****
-app.engine("handlebars", expressHandlebars({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //*****Connect to Mongo DB*****
@@ -39,7 +39,7 @@ db.once('open', function () {
 });
 
 //*****Require Routes*****
-require("./controllers/articlesController.js")(app);
+require("./controllers/article_controller.js")(app);
 
 
 //*****Start Server*****
