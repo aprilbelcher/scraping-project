@@ -14,10 +14,14 @@ var PORT = process.env.PORT || 3000;
 
 //*****Use Morgan Logger, Body Parser and Express Static*****
 app.use(logger("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 //*****Use Handelbars*****//
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
 app.set('view engine', 'handlebars');
 
 //*****Make Public Folder Static Directory*****//
@@ -35,11 +39,9 @@ db.once('open', function () {
 });
 
 //*****Require Routes*****
-require("./controllers/articlesController.js")(app);
+require("./controllers/articleController.js")(app);
 
 //*****Start Server*****
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
 });
-
-
