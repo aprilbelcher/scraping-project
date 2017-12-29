@@ -27,15 +27,23 @@ app.set('view engine', 'handlebars');
 //*****Make Public Folder Static Directory*****//
 app.use(express.static("public"));
 
-//*****Connect to Mongo DB*****//
-mongoose.connect("mongodb://localhost/scrapingProject");
+//*****Database Configuration*****//
+var databaseUri = "mongodb://localhost/scrapingProject";
+
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  mongoose.connect(databaseUri);
+}
 
 var db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', function(err){
+  console.log('Mongoose error:', err);
+});
 
 db.once('open', function () {
-  console.log('Connected');
+  console.log('Mongoose connection successful');
 });
 
 //*****Require Routes*****//
