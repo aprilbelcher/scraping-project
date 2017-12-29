@@ -1,0 +1,28 @@
+  <div class="container">
+        <div class="jumbotron">
+        <h1 class="jumboheader">Saved Articles</h1>
+        <p class="lead">Comment on your favorite articles.</p>
+        <p><a class="btn btn-lg btn-success" href="/articles" role="button">Saved Articles</a></p>
+        
+    </div>
+
+{{!--News Cards--}} {{!--Iterate through the results and populate the handlebars injection points with the scraped titles,
+links, and article snippets.--}} {{#each result}}
+<div class="card news-section">
+  <a href="{{this.link}}">
+    <h4 class="card-header">{{this.title}}</h4>
+  </a>
+  <div class="card-block">
+    <a href="{{this.link}}">
+      <p class="card-text">{{this.articleSnippet}}</p>
+    </a>
+    <br>
+    <a class="save btn btn-primary">Save</a>
+    {{!--
+    <button onclick="saveArticle('{{this.title}}','{{this.articleSnippet}}','{{this.link}}')">Save</button> --}}
+  </div>
+</div>
+<br>
+<br> {{/each}}
+
+  </div>
