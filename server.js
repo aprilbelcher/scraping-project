@@ -1,24 +1,25 @@
+//*****Require Dependencies*****//
 var express = require("express");
 var exphbs = require("express-handlebars");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-//*****Scraping Tools*****
-var axios = require("axios");
-var cheerio = require("cheerio");
+//*****Use Promise*****//
+mongoose.Promise = Promise;
 
-// //*****Require All Models*****
-// var db = require("./models");
-
-var PORT = process.env.PORT || 3000;
-
-//*****Initialize Express*****
+//*****Initialize Express*****//
 var app = express();
+var PORT = process.env.PORT || 3000;
 
 //*****Use Morgan Logger, Body Parser and Express Static*****
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//*****Scraping Tools*****//
+var axios = require("axios");
+var cheerio = require("cheerio");
+
 
 app.use(express.static("public"));
 

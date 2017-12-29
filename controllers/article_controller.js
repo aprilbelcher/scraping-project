@@ -1,48 +1,43 @@
-//*****Scraping Tools*****
+//*****Scraping Tools*****//
 var request = require("request");
 var cheerio = require("cheerio");
 
+//*****Requiring Models*****//
 var Comment = require("../models/comments.js");
 var Article = require("../models/articles.js");
 
 module.exports = function (app) {
-//***home page***//
-  app.get('/', function (req, res) {
-    res.redirect('/articles');
-  });
+//*****home page*****//
+app.get('/', function (req, res) {
+  res.redirect('/articles');
+});
 
-  app.get("/scrape", function (req, res) {
-    request("https://www.nytimes.com/", function (error, response, html) {
-      var $ = cheerio.load(html);
-      var scrapeData = [];
+//*****Scrape Data*****//
+app.get("/scrape", function (req, res) {
+  request("https://www.nytimes.com/", function (error, response, html) {
+    var $ = cheerio.load(html);
+    var all = [];
+    $("article").each(function (i, element) {
 
-      $("article").each(function (i, element) {
+      var result = {};
 
-        var result = {};
+      result.title = $(this).children("h2").text().trim();
+      result.articleSnippet = $(this).children(".summary").text().trim();
+      result.link = $(this).children("h2").children("a").attr("href");
 
-        result.title = $(this).children("h2").text();
-        result.articleSnippet = $(this).children(".summary").text();
-        result.link = $(this).children("h2").children("a").attr("href");
-
-        scrapeData.push(result)
-
-        // var entry = new Article(result);
-
-        // entry.save(function (err, doc) {
-
-        //   if (err) {
-        //     console.log(err);
-        //   } else {
-        //     console.log(doc);
-        //   }
-        // });
-
-      });
-        res.render("index", {result: scrapeData});
-      
-
+      //***If it meets all requirements push it to result***//
+      if (result.title && result.articleSnippet && result.link) {
+        all.push(result);
+      }
     });
+    //*****Return the rendered HTML via the callback function***//
+    res.render("scrape", {
+      result: all
+    });
+
   });
+  // Tell the browser that we finished scraping the text
+});
 
   app.post("/save", function(req, res) {
     console.log(req.body);

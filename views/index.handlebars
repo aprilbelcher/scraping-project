@@ -1,33 +1,36 @@
-  <div class="container">
-    <div class="jumbotron">
-      <h1 class="jumboheader">New York Times Scraper</h1>
-      <p class="lead">Get and save the latest news from New York Times.</p>
-      <p>
-        <a class="btn btn-lg" href="/scrape" role="button">Search New Articles</a>
-      </p>
-      <p>
-        <a class="btn btn-lg" href="/saved" role="button">Go to Saved Articles</a>
-      </p>
-    </div>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="jumboheader">New York Times Scraper</h1>
+    <p class="lead">Get and save the latest news from New York Times.</p>
+    <p>
+      <a class="btn btn-lg" href="/scrape" role="button">Search New Articles</a>
+    </p>
+    <p>
+      <a class="btn btn-lg" href="/articles" role="button">Go to Saved Articles</a>
+    </p>
+  </div>
 
-    <div class="row">
-      <div class="col-sm-12 scraped-articles">
+  <div class="row">
+    <div class="col-sm-12 scraped-articles">
+      <div class="panel panel-default panel-heading">
         {{#each result}}
         <div class="card news-section">
           <a href="{{this.link}}">
-            <h4 class="card-header" id="title">{{this.title}}</h4>
+            <h4 class="card-header panel-title" id="title">{{this.title}}</h4>
           </a>
-          <div class="card-block">
+          <div class="card-block ">
             <a id="link" href="{{this.link}}">
-              <p class="card-text" id="snippet">{{this.articleSnippet}}</p>
+              <p class="card-text panel-body" id="snippet">{{this.articleSnippet}}</p>
             </a>
             <br>
-            <a class="save btn btn-primary">Save</a>
+            <a class="save btn btn-primary pull-right save-button">Save</a>
           </div>
         </div>
         <br>
         <br> {{/each}}
       </div>
     </div>
-    
+
   </div>
+
+</div>

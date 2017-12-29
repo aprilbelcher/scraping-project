@@ -29,16 +29,16 @@ body{
 .panel{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.save-article{ 
+.save-button{ 
   background-color: #47C9AF;
   color: white;
 }
-.delete-article{
+.delete-button{
   background-color: #E91818;
   color: white;
   margin: 5px;
 }
-.comment-article{
+.comment-button{
   background-color: #47C9AF;
   color: white;
   margin: 5px;
