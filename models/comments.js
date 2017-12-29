@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-
+//*****Create Comment Model Schema*****///
 var CommentSchema = new Schema({
 
   name: {
